@@ -1,0 +1,1093 @@
+
+/* ==================== TOOLBAR & ESSENTIALS ==================== */
+/* Remove gap above tab-bar in multi-toolbar mode */
+:root:not([customizing]):not([inDOMFullscreen="true"]) {
+  @media not (-moz-bool-pref: "zen.view.use-single-toolbar") {
+    #zen-sidebar-top-buttons {
+    height: 4px !important;
+    min-height: 4px !important;
+    max-height: 4px !important;
+    overflow: hidden !important;
+    }
+  }
+}
+
+/* Essentials spacing */
+.zen-essentials-container.zen-workspace-tabs-section { margin-top: 3px !important; }
+#zen-essentials-container, .zen-essentials-container { gap: 0 !important; }
+
+/* Miniplayer button order */
+#zen-media-pip-button { order: 2; }
+#zen-media-close-button { order: 1; }
+
+/* Main menu button icon */
+toolbarbutton#PanelUI-menu-button {
+  list-style-image: url('chrome://branding/content/about-logo.svg') !important;
+  filter: grayscale(1) brightness(1.5);
+  image { scale: 1.7; }
+}
+
+/* ==================== URL BAR ==================== */
+html[zen-single-toolbar="true"] #urlbar:not([open]) { height: 40px !important; }
+#identity-icon-box { background: none !important; }
+
+/* Center text */
+#urlbar .urlbar-input, .urlbar-input-container {
+text-align: center !important;
+position: relative;
+}
+
+/* Blur effect when open/focused */
+#urlbar[open] .urlbar-background,
+#urlbar[focused="true"] .urlbar-background {
+background: rgba(0, 0, 0, 0.25) !important;
+backdrop-filter: blur(24px) saturate(140%) !important;
+border-radius: 14px !important;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
+}
+
+html:has(#urlbar[open]) .browserContainer { filter: blur(10px); }
+
+/* URL bar icon order */
+#zen-copy-url-button { order: 999 !important; }
+#identity-box { order: -999 !important; }
+
+/* ==================== SIDEBAR ==================== */
+/* Floating bookmark/history sidebar */
+#sidebar-box {
+position: fixed !important;
+top: 0 !important;
+left: 20px !important;
+width: 240px !important;
+height: 95vh !important;
+z-index: 9999 !important;
+border-radius: 12px !important;
+overflow: hidden !important;
+background: rgba(30, 30, 30, 0.6) !important;
+backdrop-filter: blur(12px) !important;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+#sidebar-splitter { display: none !important; }
+#appcontent { margin-left: 0 !important; }
+
+.sidebar-panel #placesContext > :is(menuitem, menu) {
+  padding-inline-start: 30px !important;
+}
+
+/* ==================== BOOKMARK FOLDER COLORS ==================== */
+[id="1760635303357-66"] image, /* Pirated Media */
+[id="1760635001487-86"] image, /* AI's */
+[id="1760635303279-47"] image, /* Arch Linux */
+[id="1760635303381-55"] image, /* Project & Learning */
+[id="1760635001460-28"] image  /* Personal Fun Projects */ {
+  -moz-context-properties: fill, stroke !important;
+}
+
+[id="1760635303357-66"] image { fill: rgb(255, 16, 83) !important; }
+[id="1760635001487-86"] image { fill: rgb(0, 127, 255) !important; }
+[id="1760635303279-47"] image { fill: rgb(127, 127, 255) !important; }
+[id="1760635303381-55"] image { fill: rgb(0, 255, 127) !important; }
+[id="1760635001460-28"] image { fill: rgb(255, 223, 0) !important; }
+
+/* ==================== VIEW SPLITTER ==================== */
+.zen-view-splitter-header {
+  opacity: 0 !important;
+  transition: opacity 0.1s ease;
+}
+
+.zen-view-splitter-header:hover { opacity: 1 !important; }
+
+/* ==================== FIND BAR ==================== */
+.browserContainer { position: relative !important; }
+
+@keyframes findbar-show {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+findbar {
+  position: absolute !important;
+  top: 30px !important;
+  right: 30px !important;
+  height: 42px !important;
+  z-index: 1000 !important;
+  min-width: 90% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 10px !important;
+  background: rgba(25, 25, 25, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 13px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
+  color: #f2f2f2 !important;
+  will-change: transform, opacity;
+}
+
+findbar:not([hidden]) {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  visibility: visible !important;
+  animation: findbar-show 0.3s ease-out forwards !important;
+}
+
+findbar[hidden] {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s !important;
+}
+
+/* Shadow behind find bar */
+#zen-tabbox-wrapper::before {
+position: absolute !important;
+z-index: 0 !important;
+content: "" !important;
+background: rgba(20, 20, 20, 0.9) !important;
+backdrop-filter: blur(16px) !important;
+opacity: 0;
+width: 89%;
+top: 29px !important;
+right: 30px;
+height: 43px !important;
+border-radius: 13px;
+transition: opacity 0.2s ease, transform 0.5s ease;
+}
+
+#zen-tabbox-wrapper[data-findbar-visible="true"]::before {
+opacity: 1 !important;
+transform: scaleX(1.01);
+}
+
+/* Find bar controls */
+.findbar-textbox {
+  flex-grow: 1 !important;
+  min-width: 230px !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  font-size: 14px !important;
+  padding: 4px 10px !important;
+  color: #f2f2f2 !important;
+}
+
+findbar toolbarbutton {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 6.5px !important;
+  transition: background 0.2s ease, transform 0.1s ease-out !important;
+  color: #f2f2f2 !important;
+}
+
+findbar .findbar-find-previous,
+findbar .findbar-find-next {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 2px !important;
+  font-size: 10px !important;
+}
+
+.findbar-find-previous { margin-right: 4px !important; }
+
+findbar .findbar-close {
+  width: 18px !important;
+  height: 18px !important;
+  padding: 2px !important;
+  font-size: 10px !important;
+  margin-left: auto !important;
+}
+
+findbar toolbarbutton:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.05) !important;
+}
+
+findbar toolbarbutton:active { transform: scale(0.92) !important; }
+
+/* ==================== UNIFIED MENU ==================== */
+#zen-site-data-header toolbarbutton::before {
+background: color-mix(in srgb, currentcolor 6%, transparent) !important;
+border: none !important;
+box-shadow: none !important;
+}
+
+#zen-site-data-header toolbarbutton:hover {
+background-color: rgba(255, 255, 255, 0.1);
+transition: background-color 0.1s linear;
+border-radius: 6px;
+}
+
+
+/* ==================== HIDE EXTENSION IN URL BAR ==================== */
+#urlbar #identity-box.extensionPage #identity-icon-label {
+display: none !important;
+}
+
+/* ==================== WORKSPACE & CONTAINER INDICATORS ==================== */
+#userContext-icons,
+.zen-current-workspace-indicator {
+  display: none !important;
+}
+
+/* ==================== UI FONT ==================== */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root, html, body, button, input, select, textarea {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", "Segoe UI Mono", "Roboto Mono", "Menlo", "Monaco", monospace;
+  font-weight: 400;
+  line-height: 1.4;
+  -moz-font-feature-settings: "ss01" 1;
+  font-variant-ligatures: contextual common-ligatures discretionary-ligatures historical-ligatures;
+  text-rendering: optimizeLegibility;
+}
+
+/* ==================== AUTO-HIDE BOOKMARK TOOLBAR ==================== */
+#main-window:not([zen-single-toolbar="true"]) {
+
+#PersonalToolbar {
+--uc-bm-height: 20px;
+--uc-bm-padding: 4px;
+--uc-autohide-toolbar-delay: 0ms;
+
+/* Touch density adjustment */
+:root[uidensity="touch"] & {
+  --uc-bm-padding: 7px;
+}
+
+/* Autohide and floating effect */
+&:not([customizing]):not([collapsed]) {
+  position: relative;
+  margin-bottom: calc(-1px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
+  transform: rotateX(90deg);
+  transform-origin: top;
+  transition: transform 135ms linear var(--uc-autohide-toolbar-delay) !important;
+  z-index: 1;
+  background-color: rgba(30, 30, 30, 0.35) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--toolbar-color) !important;
+}
+
+/* Hover reveal */
+&:hover {
+  transform: rotateX(0) !important;
+  transition-delay: 0ms !important;
+}
+
+/* Completely hide if collapsed */
+&[collapsed] { display: none !important; }
+}
+
+/* Show toolbar on nav-bar hover/focus */
+#nav-bar:hover ~ #PersonalToolbar,
+#nav-bar:focus-within ~ #PersonalToolbar {
+transform: rotateX(0) !important;
+transition-delay: 0ms !important;
+}
+}
+
+/* ==================== BLURRED COMPACT SIDEBAR ==================== */
+:root {
+  --zen-compact-bg-light: rgba(255, 255, 255, 0.45);
+  --zen-compact-bg-dark: rgba(20, 20, 20, 0.45);
+  --zen-compact-shadow-light: rgba(255, 255, 255, 0.25);
+  --zen-compact-shadow-dark: rgba(0, 0, 0, 0.35);
+  --zen-compact-blur: blur(18px);
+  --zen-compact-radius: 12px;
+  --zen-compact-padding: 8px;
+  --zen-compact-transition: 0.25s ease;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar {
+position: relative;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar::before,
+#navigator-toolbox:not([animate='true']) #titlebar::after {
+content: '';
+position: absolute;
+pointer-events: none;
+background: transparent;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar::before {
+z-index: -1;
+border-radius: 12px;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar::after {
+z-index: 0;
+opacity: var(--zen-grainy-background-opacity, 0);
+mix-blend-mode: overlay;
+}
+
+[zen-compact-mode="true"] #titlebar {
+  border-radius: var(--zen-compact-radius);
+  padding: var(--zen-compact-padding);
+  background: light-dark(var(--zen-compact-bg-light), var(--zen-compact-bg-dark));
+  box-shadow: 0 4px 14px light-dark(var(--zen-compact-shadow-light), var(--zen-compact-shadow-dark));
+  transition: background var(--zen-compact-transition), box-shadow var(--zen-compact-transition);
+}
+
+[zen-compact-mode="true"] #titlebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: var(--zen-compact-blur);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+[zen-compact-mode="true"] .zen-toolbar-background {
+  opacity: 0.35;
+  transition: opacity var(--zen-compact-transition);
+}
+
+[zen-right-side="true"][zen-compact-mode="true"] #browser::after {
+  right: calc(var(--zen-element-separation) / 0.65);
+  left: auto;
+}
+
+[zen-right-side="true"][zen-compact-mode="true"] #titlebar {
+  right: calc(var(--zen-element-separation) / 0.9);
+  left: auto;
+}
+
+[zen-compact-mode="true"][zen-user-show=""] #browser::after,
+[zen-compact-mode="true"] #navigator-toolbox[zen-has-hover="true"] #browser::after,
+[zen-compact-mode="true"] #navigator-toolbox[has-popup-menu=""] #browser::after {
+  opacity: 1;
+  transition: opacity var(--zen-compact-transition);
+}
+
+/* ==================== PINNED EXTENSIONS ==================== */
+:root {
+  --ext-border-radius: 6px;
+  --ext-bg-hover: #3a3a3a;
+}
+
+:root[customizing] #TabsToolbar-customization-target {
+  visibility: visible !important;
+}
+
+.zen-workspace-pinned-tabs-section {
+  display: flex !important;
+  flex-direction: column;
+}
+
+:root[zen-single-toolbar="true"] #nav-bar {
+  margin-bottom: 8px !important;
+}
+
+/* Container layout */
+#TabsToolbar-customization-target {
+display: flex !important;
+flex-direction: row !important;
+flex-wrap: wrap !important;
+gap: calc(var(--zen-toolbox-padding) - 3px) !important;
+}
+
+#TabsToolbar-customization-target #tabbrowser-tabs {
+min-width: 100% !important;
+height: calc(100% - 27px) !important;
+transform: translateY(-3px);
+}
+
+#TabsToolbar-customization-target #Zen-tabs-wrapper {
+max-height: 700px !important;
+}
+
+#TabsToolbar-customization-target .unified-extensions-item-action-button {
+padding: 0 !important;
+}
+
+/* Extension icons */
+#TabsToolbar-customization-target .unified-extensions-item {
+margin-inline: 2px !important;
+border-bottom: 0 !important;
+padding: 0 !important;
+height: 32px !important;
+width: 32px !important;
+flex-grow: 1 !important;
+order: -1 !important;
+background-color: transparent !important;
+box-shadow: none !important;
+border-radius: calc(var(--ext-border-radius) - 0.5px) !important;
+transition: background-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+#TabsToolbar-customization-target .unified-extensions-item:hover {
+background-color: var(--ext-bg-hover) !important;
+box-shadow: 0 0 3px rgba(0,0,0,0.95) !important;
+}
+
+#TabsToolbar-customization-target
+> toolbarbutton:not([id="tabs-newtab-button"]):not(#sort-button):not(#clear-button),
+#TabsToolbar-customization-target
+> toolbaritem:not(#sort-button):not(#clear-button) {
+  height: 32px !important;
+  width: 32px !important;
+  flex-grow: 1 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+#TabsToolbar-customization-target
+> toolbarbutton:not([id="tabs-newtab-button"]) toolbarbutton,
+#TabsToolbar-customization-target
+> toolbarbutton:not([id="tabs-newtab-button"]) stack {
+  --toolbarbutton-active-background: transparent !important;
+  --toolbarbutton-hover-background: transparent !important;
+}
+
+#TabsToolbar-customization-target .toolbarbutton-badge,
+#TabsToolbar-customization-target .toolbarbutton-text {
+display: none !important;
+}
+
+#TabsToolbar-customization-target
+> toolbarbutton:not([id="tabs-newtab-button"]),
+#TabsToolbar-customization-target
+> toolbaritem {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: calc(var(--ext-border-radius) + 1px) !important;
+  margin: 0 !important;
+  order: -1 !important;
+  flex-grow: 1 !important;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+#TabsToolbar-customization-target
+> toolbarbutton:not([id="tabs-newtab-button"]):hover,
+#TabsToolbar-customization-target
+> toolbaritem:hover {
+  background-color: var(--ext-bg-hover) !important;
+  box-shadow: 0 0 3px rgba(0,0,0,0.95) !important;
+}
+
+/* Collapsed toolbar */
+html:not([zen-sidebar-expanded="true"]):not([zen-single-toolbar="true"])
+#TabsToolbar-customization-target .unified-extensions-item {
+width: 24px !important;
+height: 32px !important;
+margin-inline: 6px !important;
+margin-block: 2px !important;
+}
+
+/* Clean transparent icons */
+.unified-extensions-item {
+  position: relative !important;
+  border-radius: calc(var(--ext-border-radius) + 1px) !important;
+}
+
+.unified-extensions-item::before {
+  content: none !important;
+}
+
+
+/* ==================== MINIPLAYER CUSTOM ==================== */
+#zen-media-controls-toolbar {
+& .show-on-hover {
+  max-height: unset !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  padding-right: 6px;
+  pointer-events: none;
+  transition: max-height 0.2s ease, opacity 0.2s ease, transform 0.2s ease,
+  padding 0.2s ease;
+}
+}
+
+/* Media buttons hover effect */
+#zen-media-buttons-hbox > toolbarbutton {
+opacity: 0 !important;
+transition: all 0.3s ease-in-out !important;
+
+&:hover {
+  opacity: 1 !important;
+}
+}
+
+/* Media controls hover expansion */
+#zen-media-controls-toolbar {
+#zen-media-controls-hbox {
+order: 0 !important;
+height: 0 !important;
+overflow: hidden !important;
+}
+
+&:hover {
+  #zen-media-controls-hbox {
+  height: fit-content !important;
+  opacity: 1 !important;
+  }
+}
+}
+
+#zen-media-main-vbox > vbox {
+order: 1 !important;
+}
+
+/* Media controls glow effect */
+#zen-media-controls-toolbar::after {
+position: absolute;
+content: "";
+bottom: 0px;
+left: 0;
+right: 0;
+z-index: -1;
+height: 100%;
+width: 100%;
+transform: scale(0.9) translateZ(0);
+filter: blur(15px);
+opacity: 0 !important;
+transition: all 0.3s ease-in-out !important;
+background: linear-gradient(
+  135deg,
+  color-mix(in srgb, var(--zen-primary-color) 10%, black),
+                            var(--zen-primary-color),
+                            color-mix(in srgb, var(--zen-primary-color) 25%, white),
+                            var(--zen-primary-color),
+                            light-dark(#fffd, #000d),
+                            light-dark(#fffd, #000d),
+                            var(--zen-primary-color),
+                            color-mix(in srgb, var(--zen-primary-color) 50%, white),
+                            color-mix(in srgb, var(--zen-primary-color) 25%, white),
+                            var(--zen-primary-color),
+                            color-mix(in srgb, var(--zen-primary-color) 25%, black),
+                            light-dark(#fffd, #000d),
+                            color-mix(in srgb, var(--zen-primary-color) 10%, black),
+                            light-dark(#fffd, #000d),
+                            color-mix(in srgb, var(--zen-primary-color) 75%, black),
+                            color-mix(in srgb, var(--zen-primary-color) 50%, black),
+                            color-mix(in srgb, var(--zen-primary-color) 25%, black),
+                            color-mix(in srgb, var(--zen-primary-color) 10%, black),
+                            light-dark(#fffd, #000d)
+);
+
+background-size: 200% 200%;
+}
+
+/* Playing media styling */
+#zen-media-controls-toolbar.playing {
+toolbaritem {
+  background-color: light-dark(#fffd, #000d) !important;
+}
+
+padding: 16px 24px;
+position: relative;
+border-radius: 8px;
+box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01);
+
+&::after {
+  opacity: 1 !important;
+  animation: animateGlow 5s cubic-bezier(0.1, 0.7, 0.5, 0.1) infinite;
+}
+
+&:hover::after {
+  height: 150%;
+}
+}
+
+/* Glow animation keyframes */
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 20%;
+  }
+  100% {
+    background-position: 200% 20%;
+  }
+}
+
+#zen-sidebar-foot-buttons{
+margin-bottom: 5px !important;
+}
+
+/* Move the site (music note) button to close button position */
+#zen-media-focus-button {
+position: absolute !important;
+top: -1px;
+right: 2px;
+z-index: 10;
+transition: top 0.3s ease, right 0.3s ease, transform 0.3s ease;
+}
+
+/* When media player is hovered, move the button */
+#zen-media-controls-toolbar:hover #zen-media-focus-button {
+top: 4px;
+right: 4px;
+}
+
+#zen-media-artist {
+margin-top: 2px !important;
+}
+
+
+#zen-media-playback-buttons {
+display: flex !important;
+order: 2 !important;
+
+margin-right: 38.5px !important;
+justify-content: space-between !important;
+width: 9.5em !important;     /* reduce this to bring buttons closer */
+
+}
+
+
+
+#zen-media-controls-toolbar {
+& #zen-media-buttons-hbox {
+  align-items: start;
+  margin-top: -4px;
+  scale: 0.8 !important;
+  --toolbarbutton-outer-padding: 2px;
+  flex-direction: column !important;
+}
+}
+
+#zen-media-buttons-hbox {
+max-height: 0 !important;
+overflow: hidden !important;
+opacity: 0 !important;
+
+pointer-events: none !important;
+transition:
+max-height 0.2s ease,
+opacity 0.2s ease,
+transform 0.2s ease;
+}
+
+#zen-media-controls-toolbar:hover #zen-media-buttons-hbox {
+max-height: 32px !important;
+opacity: 1 !important;
+pointer-events: auto !important;
+overflow: visible !important;
+}
+
+#zen-media-mute-button {
+position: relative !important;
+
+order: 0 !important;
+margin-right: -4px !important;
+}
+
+/* ==================== PIP (PICTURE-IN-PICTURE) ==================== */
+:root {
+  --primary: #a0d490;
+  --primary-mixed: color-mix(in srgb, #a0d490 50%, black 50%);
+  --secondary-mixed: color-mix(in srgb, var(--primary-mixed) 20%, white 80%);
+  --bg-light: rgba(255, 255, 255, 0.8);
+  --bg-dark: rgba(0, 0, 0, 0.8);
+  --blur: 100px;
+  --border-light: rgba(20, 20, 20, 0.1);
+  --border-dark: rgba(235, 235, 235, 0.1);
+  --glass-bg: color-mix(in srgb, var(--secondary-mixed) 75%, transparent);
+  --glass-shadow-light: color-mix(in srgb, var(--secondary-mixed) 75%, black);
+  --glass-shadow-dark: color-mix(in srgb, var(--secondary-mixed) 75%, white);
+  --hover-light: rgba(29, 29, 29, 0.1);
+  --hover-dark: rgba(235, 235, 235, 0.1);
+  --active-light: rgba(0, 0, 0, 0.07);
+  --active-dark: rgba(255, 255, 255, 0.11);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-mixed: color-mix(in srgb, #a0d490 20%, #1d1d1d 80%);
+    --secondary-mixed: color-mix(in srgb, #a0d490 30%, #1d1d1d 70%);
+  }
+}
+
+body:has(.player-holder) html,
+body:has(.player-holder) .player-holder,
+body:has(#controls) html,
+body:has(#controls) .player-holder {
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+body:has(.player-holder) .player-holder,
+body:has(#controls) .player-holder {
+  border-radius: 7.6px;
+  clip-path: none;
+}
+
+@media (-moz-platform: windows) {
+  body:has(.player-holder) window,
+  body:has(.player-holder) html,
+  body:has(.player-holder) body,
+  body:has(#controls) window,
+  body:has(#controls) html,
+  body:has(#controls) body {
+    border-radius: 9px;
+  }
+}
+
+@keyframes pip-fadein-html {
+  0% { background-color: transparent; scale: 0.8; }
+  99% { background-color: transparent; scale: 1; }
+  100% { background-color: black; }
+}
+
+@keyframes pip-fadein-player {
+  0% { filter: blur(30px); opacity: 0; }
+  70% { filter: blur(5px); }
+  100% { filter: blur(0); opacity: 1; }
+}
+
+body:has(.player-holder) html,
+body:has(#controls) html {
+  animation: pip-fadein-html 0.5s ease;
+  will-change: scale;
+}
+
+body:has(.player-holder) .player-holder,
+body:has(#controls) .player-holder {
+  animation: pip-fadein-player 0.5s ease;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  will-change: filter, opacity;
+}
+
+#controls {
+opacity: 1;
+}
+
+#controls > button {
+opacity: 0;
+top: 0;
+filter: blur(5px);
+border-radius: 6px;
+transition: opacity 0.3s ease, top 0.3s ease, filter 0.3s ease, background-color 0.2s ease;
+backdrop-filter: saturate(1.5) contrast(1.2) blur(var(--blur));
+background-image: none;
+background-color: light-dark(var(--bg-light), var(--bg-dark));
+box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+border: 2px solid light-dark(var(--border-light), var(--border-dark));
+will-change: opacity, top, filter;
+}
+
+#controls > button::before {
+content: "";
+width: 16px;
+height: 16px;
+padding: 2px;
+display: flex;
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+align-content: center;
+justify-content: center;
+fill: light-dark(black, white);
+}
+
+#controls > button:hover {
+background-color: black;
+}
+
+#close::before {
+content: url("chrome://browser/skin/zen-icons/close.svg");
+}
+
+#minimize::before {
+content: url("chrome://browser/skin/zen-icons/unpin.svg");
+}
+
+#unpip::before {
+content: url("chrome://browser/skin/zen-icons/screen.svg");
+}
+
+#controls-bottom-gradient {
+display: none;
+}
+
+#controls-bottom {
+opacity: 0;
+bottom: -5px;
+background-color: light-dark(var(--bg-light), var(--bg-dark));
+border-radius: 10px;
+padding: 10px 15px;
+margin: 0 5px 5px;
+width: min(calc(100% - 10px), 700px);
+box-sizing: border-box;
+box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+backdrop-filter: saturate(3) contrast(2) blur(var(--blur));
+filter: blur(10px);
+transition: opacity 0.3s ease, bottom 0.3s ease, filter 0.3s ease;
+border: 2px solid light-dark(var(--border-light), var(--border-dark));
+left: calc(50% - 5px);
+transform: translateX(-50%);
+will-change: opacity, bottom, filter;
+}
+
+#controls-bottom .start-controls {
+display: none;
+}
+
+@media (width > 300px) {
+  #controls-bottom .start-controls {
+  display: flex;
+  }
+}
+
+#controls-bottom .start-controls #timestamp {
+font-size: 12px;
+color: light-dark(black, white);
+}
+
+#controls-bottom .end-controls {
+display: flex;
+}
+
+#controls-bottom #scrubber,
+#controls-bottom #audio-scrubber {
+margin: 0;
+}
+
+#controls-bottom #scrubber::-moz-range-progress {
+background: white;
+}
+
+#controls-bottom #scrubber::-moz-range-track,
+#controls-bottom #audio-scrubber::-moz-range-track {
+background-color: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+}
+
+#controls-bottom #scrubber::-moz-range-thumb,
+#controls-bottom #audio-scrubber::-moz-range-thumb {
+background: white;
+width: 12px;
+height: 12px;
+border: none;
+}
+
+#controls-bottom #audio-scrubber::-moz-range-thumb {
+width: 8px;
+height: 8px;
+opacity: 1;
+}
+
+#controls-bottom button,
+#settings button {
+opacity: 1;
+position: relative;
+padding: 6px;
+background-size: 16px;
+width: 28px;
+height: 28px;
+border-radius: 6px;
+transition: background-color 0.2s ease;
+-moz-context-properties: fill;
+fill: light-dark(black, white);
+}
+
+#controls-bottom button[disabled],
+#settings button[disabled] {
+cursor: default;
+fill-opacity: 0.4;
+}
+
+#controls-bottom button[disabled]::after,
+#settings button[disabled]::after {
+display: none;
+}
+
+#controls-bottom button:not([disabled]):hover,
+#settings button:not([disabled]):hover {
+background-color: light-dark(var(--hover-light), var(--hover-dark));
+}
+
+#controls-bottom button:not([disabled]):active,
+#settings button:not([disabled]):active {
+background-color: light-dark(var(--active-light), var(--active-dark));
+}
+
+#controls-bottom button#playpause {
+background-image: url("chrome://browser/skin/zen-icons/media-play.svg");
+}
+
+#controls-bottom button#audio {
+background-image: url("chrome://browser/skin/zen-icons/media-unmute.svg");
+}
+
+#controls-bottom button#seekBackward {
+background-image: url("chrome://browser/skin/zen-icons/reload.svg");
+scale: -1 1;
+}
+
+#controls-bottom button#seekBackward::before,
+#controls-bottom button#seekForward::before {
+content: "5";
+font-size: 8px;
+position: absolute;
+top: 50%;
+left: 50%;
+}
+
+#controls-bottom button#seekBackward::before {
+transform: translate(50%, -50%);
+scale: -1 1;
+}
+
+#controls-bottom button#seekBackward::after {
+scale: -1 1;
+}
+
+#controls-bottom button#seekForward {
+background-image: url("chrome://browser/skin/zen-icons/reload.svg");
+}
+
+#controls-bottom button#seekForward::before {
+transform: translate(-50%, -50%);
+}
+
+#controls-bottom button#fullscreen {
+background-image: url("chrome://browser/skin/zen-icons/fullscreen.svg");
+}
+
+#controls-bottom .controls-bottom-upper {
+margin: 0 0 5px;
+width: 100%;
+height: fit-content;
+}
+
+#controls-bottom .controls-bottom-upper .scrubber-no-drag {
+margin: 0;
+}
+
+#controls-bottom .controls-bottom-upper:has(#scrubber[hidden]) {
+display: none;
+margin: 0;
+}
+
+#controls-bottom .controls-bottom-lower {
+margin: 0;
+}
+
+#settings {
+bottom: 80px;
+right: 0;
+display: block;
+transition: opacity 0.3s ease, bottom 0.3s ease;
+}
+
+#settings .arrow {
+display: none;
+}
+
+#settings label,
+#settings legend {
+font-family: system-ui;
+color: light-dark(black, white);
+}
+
+#settings .slider {
+background-color: rgba(0, 0, 0, 0.07);
+outline: 1px solid light-dark(#8f8f9d, #bfbfc9);
+}
+
+#settings .slider::before {
+background-color: light-dark(#8f8f9d, #bfbfc9);
+}
+
+#settings input:checked {
+border-color: light-dark(var(--primary-mixed), var(--primary));
+}
+
+#settings input:checked + .slider {
+background-color: light-dark(var(--primary-mixed), var(--primary));
+outline-color: light-dark(var(--primary-mixed), var(--primary));
+}
+
+#settings input:checked + .slider::before {
+background-color: white;
+}
+
+#settings > .panel-fieldset {
+background-color: var(--glass-bg);
+backdrop-filter: blur(15px);
+filter: blur(0);
+transition: backdrop-filter 0.3s ease, filter 0.3s ease;
+border: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3));
+box-shadow: 0 0 10px light-dark(var(--glass-shadow-light), var(--glass-shadow-dark));
+padding: 0;
+will-change: filter;
+}
+
+#settings .grey-line {
+width: calc(100% - 10px);
+margin: 0 auto;
+background-color: light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3));
+}
+
+#settings.hide {
+bottom: 70px;
+opacity: 0;
+pointer-events: none;
+}
+
+#settings.hide > .panel-fieldset {
+backdrop-filter: none;
+filter: blur(5px);
+}
+
+#controls.muted #controls-bottom #audio {
+background-image: url("chrome://browser/skin/zen-icons/media-mute.svg");
+}
+
+#controls.playing #controls-bottom #playpause {
+background-image: url("chrome://browser/skin/zen-icons/media-pause.svg");
+}
+
+body:fullscreen #controls[showing]:hover > button,
+body:not(:fullscreen) #controls:hover > button {
+  opacity: 1;
+  top: 10px;
+  filter: blur(0);
+}
+
+body:fullscreen #controls[showing]:hover #controls-bottom,
+body:not(:fullscreen) #controls:hover #controls-bottom {
+  opacity: 1;
+  bottom: 5px;
+  filter: blur(0);
+}
+
+body:fullscreen:has(#controls:not([showing])) {
+  cursor: none;
+}
+
+body:fullscreen #controls #controls-bottom #fullscreen {
+  background-image: url("chrome://browser/skin/zen-icons/fullscreen-exit.svg");
+}
+
+/* ============== Smaller Compact Mode Sidebar ==================== */
+/* Reduce width when sidebar is expanded */
+@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+  #navigator-toolbox {
+  --zen-navigation-toolbar-min-width: 100px !important;
+  }
+}
+
+@media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
+  :root[zen-compact-mode="true"] #navigator-toolbox {
+    margin-block: 12.5vh !important;
+    height: 75vh !important;
+  }
+}
+
+/*=============== Opposite Side Glace Buttons =================== */
+.zen-glance-sidebar-container {
+  left: auto !important;
+  right: 100% !important;
+  inset-inline-end: 100% !important;
+}
+
+#main-window[zen-right-side="true"] .zen-glance-sidebar-container {
+right: auto !important;
+left: 100% !important;
+inset-inline-start: 100% !important;
+}

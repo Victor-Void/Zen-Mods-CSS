@@ -1,0 +1,26 @@
+/* Remove gap above tab-bar in multi-toolbar mode */
+:root:not([customizing]):not([inDOMFullscreen="true"]) {
+    @media not (-moz-bool-pref: "zen.view.use-single-toolbar") {
+        #zen-sidebar-top-buttons {
+        height: 4px !important;
+        min-height: 4px !important;
+        max-height: 4px !important;
+        overflow: hidden !important;
+        }
+    }
+}
+
+/* Essentials spacing */
+.zen-essentials-container.zen-workspace-tabs-section { margin-top: 3px !important; }
+#zen-essentials-container, .zen-essentials-container { gap: 0 !important; }
+
+/* Miniplayer button order */
+#zen-media-pip-button { order: 2; }
+#zen-media-close-button { order: 1; }
+
+/* Main menu button icon */
+toolbarbutton#PanelUI-menu-button {
+    list-style-image: url('chrome://branding/content/about-logo.svg') !important;
+    filter: grayscale(1) brightness(1.5);
+    image { scale: 1.7; }
+}

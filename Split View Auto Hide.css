@@ -1,0 +1,6 @@
+.zen-view-splitter-header {
+    opacity: 0 !important;
+    transition: opacity 0.1s ease;
+}
+
+.zen-view-splitter-header:hover { opacity: 1 !important; }

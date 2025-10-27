@@ -1,0 +1,72 @@
+:root {
+    --zen-compact-bg-light: rgba(255, 255, 255, 0.45);
+    --zen-compact-bg-dark: rgba(20, 20, 20, 0.45);
+    --zen-compact-shadow-light: rgba(255, 255, 255, 0.25);
+    --zen-compact-shadow-dark: rgba(0, 0, 0, 0.35);
+    --zen-compact-blur: blur(18px);
+    --zen-compact-radius: 12px;
+    --zen-compact-padding: 8px;
+    --zen-compact-transition: 0.25s ease;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar {
+position: relative;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar::before,
+#navigator-toolbox:not([animate='true']) #titlebar::after {
+content: '';
+position: absolute;
+pointer-events: none;
+background: transparent;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar::before {
+z-index: -1;
+border-radius: 12px;
+}
+
+#navigator-toolbox:not([animate='true']) #titlebar::after {
+z-index: 0;
+opacity: var(--zen-grainy-background-opacity, 0);
+mix-blend-mode: overlay;
+}
+
+[zen-compact-mode="true"] #titlebar {
+    border-radius: var(--zen-compact-radius);
+    padding: var(--zen-compact-padding);
+    background: light-dark(var(--zen-compact-bg-light), var(--zen-compact-bg-dark));
+    box-shadow: 0 4px 14px light-dark(var(--zen-compact-shadow-light), var(--zen-compact-shadow-dark));
+    transition: background var(--zen-compact-transition), box-shadow var(--zen-compact-transition);
+}
+
+[zen-compact-mode="true"] #titlebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: var(--zen-compact-blur);
+    z-index: -1;
+    border-radius: inherit;
+}
+
+[zen-compact-mode="true"] .zen-toolbar-background {
+    opacity: 0.35;
+    transition: opacity var(--zen-compact-transition);
+}
+
+[zen-right-side="true"][zen-compact-mode="true"] #browser::after {
+    right: calc(var(--zen-element-separation) / 0.65);
+    left: auto;
+}
+
+[zen-right-side="true"][zen-compact-mode="true"] #titlebar {
+    right: calc(var(--zen-element-separation) / 0.9);
+    left: auto;
+}
+
+[zen-compact-mode="true"][zen-user-show=""] #browser::after,
+[zen-compact-mode="true"] #navigator-toolbox[zen-has-hover="true"] #browser::after,
+[zen-compact-mode="true"] #navigator-toolbox[has-popup-menu=""] #browser::after {
+    opacity: 1;
+    transition: opacity var(--zen-compact-transition);
+}
