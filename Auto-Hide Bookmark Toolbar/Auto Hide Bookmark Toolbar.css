@@ -1,0 +1,44 @@
+#main-window:not([zen-single-toolbar="true"]) {
+
+#PersonalToolbar {
+--uc-bm-height: 20px;
+--uc-bm-padding: 4px;
+--uc-autohide-toolbar-delay: 0ms;
+
+/* Touch density adjustment */
+:root[uidensity="touch"] & {
+    --uc-bm-padding: 7px;
+}
+
+/* Autohide and floating effect */
+&:not([customizing]):not([collapsed]) {
+    position: relative;
+    margin-bottom: calc(-1px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
+    transform: rotateX(90deg);
+    transform-origin: top;
+    transition: transform 135ms linear var(--uc-autohide-toolbar-delay) !important;
+    z-index: 1;
+    background-color: rgba(30, 30, 30, 0.35) !important;
+    backdrop-filter: blur(12px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--toolbar-color) !important;
+}
+
+/* Hover reveal */
+&:hover {
+    transform: rotateX(0) !important;
+    transition-delay: 0ms !important;
+}
+
+/* Completely hide if collapsed */
+&[collapsed] { display: none !important; }
+}
+
+/* Show toolbar on nav-bar hover/focus */
+#nav-bar:hover ~ #PersonalToolbar,
+#nav-bar:focus-within ~ #PersonalToolbar {
+transform: rotateX(0) !important;
+transition-delay: 0ms !important;
+}
+}
