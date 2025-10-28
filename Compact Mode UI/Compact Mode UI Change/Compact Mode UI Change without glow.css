@@ -7,7 +7,7 @@
     box-shadow: none !important;
     border: none !important;
     outline: none !important;
-    transform: translateX(20px) !important; /* shifted 20px to the right */
+    transform: translateX(10px) !important;
 }
 
 :root[zen-compact-mode="true"] #titlebar{
