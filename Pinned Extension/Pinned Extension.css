@@ -1,9 +1,10 @@
+/* ==================== PINNED EXTENSIONS ==================== */
 :root {
     --ext-border-radius: 6px;
     --ext-bg-hover: #3a3a3a;
 }
 
-:root[customizing] #TabsToolbar-customization-target {
+:root:not([customizing]) #TabsToolbar-customization-target {
     visibility: visible !important;
 }
 

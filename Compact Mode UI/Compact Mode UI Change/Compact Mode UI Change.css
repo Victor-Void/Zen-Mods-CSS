@@ -1,5 +1,10 @@
 /* ============= COMPACT MODE UI ================ */
-:root[zen-compact-mode="true"] #titlebar {
+:root[customizing] {
+    /* Revert all compact mode styles when customizing */
+    --disable-compact-mode: true !important;
+}
+
+:root[zen-compact-mode="true"]:not([customizing]) #titlebar {
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
@@ -9,8 +14,7 @@
     outline: none !important;
     transform: translateX(20px) !important; /* shifted 20px to the right */
 }
-
-:root[zen-compact-mode="true"] #titlebar{
+:root[zen-compact-mode="true"]:not([customizing]) #titlebar{
     background: rgba(0, 0, 0, 0.97) !important;
     backdrop-filter: blur(6px) saturate(100%) !important;
     -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
@@ -21,12 +25,10 @@
     0 0 72px rgba(80,160,255,0.60),
     0 0 0 1px rgba(150,190,255,0.35) !important;
 }
-
-:root[zen-compact-mode="true"] .browserContainer {
+:root[zen-compact-mode="true"]:not([customizing]) .browserContainer {
     --margin-top-fix: 0 !important;
 }
-
-:root[zen-compact-mode="true"] #zen-appcontent-navbar-wrapper {
+:root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -41,8 +43,7 @@
     overflow: visible !important;
     display: block !important;
 }
-
-:root[zen-compact-mode="true"] #zen-appcontent-navbar-container {
+:root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-container {
     position: fixed !important;
     top: 20px !important;
     left: 50% !important;
@@ -59,51 +60,57 @@
     height: auto !important;
     min-height: 0 !important;
 }
-
-:root[zen-compact-mode="true"] #nav-bar {
+:root[zen-compact-mode="true"]:not([customizing]) #nav-bar {
     display: flex !important;
     align-items: center !important;
     gap: 0px !important;
     background: rgba(0, 0, 0, 0.97) !important;
     backdrop-filter: blur(6px) saturate(100%) !important;
     -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
-    border-radius: 12px !important;
-    padding: 1px 3px !important;
-    margin: 0 !important;
-    height: 500px !important;
-    max-height: 50px !important;
-    overflow: visible !important;
     box-shadow:
     0 6px 20px rgba(0,0,0,0.35),
     0 0 24px rgba(80,160,255,0.95),
     0 0 48px rgba(80,160,255,0.75),
     0 0 72px rgba(80,160,255,0.60),
     0 0 0 1px rgba(150,190,255,0.35) !important;
+    border-radius: 12px !important;
+    padding: 1px 3px !important;
+    margin: 0 !important;
+    height: 500px !important;
+    max-height: 50px !important;
+    overflow: visible !important;
     transition: box-shadow 0.35s ease, background 0.35s ease !important;
     will-change: box-shadow, background;
 }
-
-:root[zen-compact-mode="true"] .urlbar-input-container {
+:root[zen-compact-mode="true"]:not([customizing]) .urlbar-input-container {
     flex: 1 1 auto !important;
     display: flex !important;
     justify-content: center !important;
     margin: 0 !important;
     transition: inherit !important;
 }
-
-:root[zen-compact-mode="true"] .urlbar-input-container .urlbar-input {
+:root[zen-compact-mode="true"]:not([customizing]) .urlbar-input-container .urlbar-input {
     width: 100% !important;
     text-align: center !important;
 }
-
-:root[zen-compact-mode="true"] .urlbar-input-container .urlbar-icons {
+:root[zen-compact-mode="true"]:not([customizing]) .urlbar-input-container .urlbar-icons {
     position: absolute !important;
     right: 8px !important;
     display: flex !important;
     align-items: center !important;
     gap: 4px !important;
 }
-
-:root[zen-compact-mode="true"] .urlbar-background {
+:root[zen-compact-mode="true"]:not([customizing]) .urlbar-background {
     transition: inherit !important;
+}
+@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+    #navigator-toolbox {
+    --zen-navigation-toolbar-min-width: 100px !important;
+    }
+}
+@media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
+    :root[zen-compact-mode="true"]:not([customizing]) #navigator-toolbox {
+        margin-block: 12.5vh !important;
+        height: 75vh !important;
+    }
 }
