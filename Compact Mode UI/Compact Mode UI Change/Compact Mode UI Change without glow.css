@@ -14,12 +14,6 @@
     background: rgba(0, 0, 0, 0.97) !important;
     backdrop-filter: blur(6px) saturate(100%) !important;
     -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
-    box-shadow:
-    0 6px 20px rgba(0,0,0,0.35),
-    0 0 24px rgba(80,160,255,0.95),
-    0 0 48px rgba(80,160,255,0.75),
-    0 0 72px rgba(80,160,255,0.60),
-    0 0 0 1px rgba(150,190,255,0.35) !important;
 }
 
 :root[zen-compact-mode="true"] .browserContainer {
@@ -73,12 +67,6 @@
     height: 500px !important;
     max-height: 50px !important;
     overflow: visible !important;
-    box-shadow:
-    0 6px 20px rgba(0,0,0,0.35),
-    0 0 24px rgba(80,160,255,0.95),
-    0 0 48px rgba(80,160,255,0.75),
-    0 0 72px rgba(80,160,255,0.60),
-    0 0 0 1px rgba(150,190,255,0.35) !important;
     transition: box-shadow 0.35s ease, background 0.35s ease !important;
     will-change: box-shadow, background;
 }
@@ -106,4 +94,17 @@
 
 :root[zen-compact-mode="true"] .urlbar-background {
     transition: inherit !important;
+}
+
+@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+    #navigator-toolbox {
+    --zen-navigation-toolbar-min-width: 100px !important;
+    }
+}
+
+@media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
+    :root[zen-compact-mode="true"] #navigator-toolbox {
+        margin-block: 12.5vh !important;
+        height: 75vh !important;
+    }
 }
