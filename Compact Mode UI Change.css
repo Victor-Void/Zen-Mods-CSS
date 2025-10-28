@@ -1,3 +1,4 @@
+/* ============= COMPACT MODE UI ================ */
 :root[zen-compact-mode="true"] #titlebar {
     background: transparent !important;
     backdrop-filter: none !important;
@@ -6,12 +7,13 @@
     box-shadow: none !important;
     border: none !important;
     outline: none !important;
+    transform: translateX(20px) !important; /* shifted 20px to the right */
 }
 
 :root[zen-compact-mode="true"] #titlebar:hover {
-    background: rgba(18, 24, 40, 0.97) !important;
-    backdrop-filter: blur(6px) saturate(130%) !important;
-    -webkit-backdrop-filter: blur(6px) saturate(130%) !important;
+    background: rgba(0, 0, 0, 0.97) !important;
+    backdrop-filter: blur(6px) saturate(100%) !important;
+    -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
     box-shadow:
     0 6px 20px rgba(0,0,0,0.35),
     0 0 24px rgba(80,160,255,0.95),
@@ -62,9 +64,9 @@
     display: flex !important;
     align-items: center !important;
     gap: 0px !important;
-    background: rgba(18, 24, 40, 0.97) !important;
-    backdrop-filter: blur(6px) saturate(130%) !important;
-    -webkit-backdrop-filter: blur(6px) saturate(130%) !important;
+    background: rgba(0, 0, 0, 0.97) !important;
+    backdrop-filter: blur(6px) saturate(100%) !important;
+    -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
     border-radius: 12px !important;
     padding: 1px 3px !important;
     margin: 0 !important;
