@@ -682,10 +682,13 @@ margin-right: -4px !important;
   --secondary-mixed: color-mix(in srgb, var(--primary-mixed) 20%, white 80%);
   --bg-light: rgba(255, 255, 255, 0.8);
   --bg-dark: rgba(0, 0, 0, 0.8);
+  --bg-tint-light: color-mix(in srgb, #a0d490 30%, rgba(255, 255, 255, 0.8));
+  --bg-tint-dark: color-mix(in srgb, var(--secondary-mixed) 40%, rgba(0, 0, 0, 0.8));
   --blur: 100px;
   --border-light: rgba(20, 20, 20, 0.1);
   --border-dark: rgba(235, 235, 235, 0.1);
-  --glass-bg: color-mix(in srgb, var(--secondary-mixed) 75%, transparent);
+  --glass-bg-light: color-mix(in srgb, var(--secondary-mixed) 75%, transparent);
+  --glass-bg-dark: color-mix(in srgb, var(--secondary-mixed) 75%, transparent);
   --glass-shadow-light: color-mix(in srgb, var(--secondary-mixed) 75%, black);
   --glass-shadow-dark: color-mix(in srgb, var(--secondary-mixed) 75%, white);
   --hover-light: rgba(29, 29, 29, 0.1);
@@ -701,20 +704,26 @@ margin-right: -4px !important;
   }
 }
 
+/* Base rounded corners - scope to PiP window */
+body:has(.player-holder) .player-holder,
+body:has(#controls) .player-holder {
+  border-radius: 7.6px !important;
+}
+
 body:has(.player-holder) html,
 body:has(.player-holder) .player-holder,
 body:has(#controls) html,
 body:has(#controls) .player-holder {
-  border-radius: 9px;
-  overflow: hidden;
+  border-radius: 9px !important;
+  overflow: hidden !important;
 }
 
 body:has(.player-holder) .player-holder,
 body:has(#controls) .player-holder {
-  border-radius: 7.6px;
-  clip-path: none;
+  clip-path: none !important;
 }
 
+/* Windows specific rounding */
 @media (-moz-platform: windows) {
   body:has(.player-holder) window,
   body:has(.player-holder) html,
@@ -722,51 +731,76 @@ body:has(#controls) .player-holder {
   body:has(#controls) window,
   body:has(#controls) html,
   body:has(#controls) body {
-    border-radius: 9px;
+    border-radius: 9px !important;
   }
 }
 
+/* Animations - use transform and opacity for GPU acceleration */
 @keyframes pip-fadein-html {
-  0% { background-color: transparent; scale: 0.8; }
-  99% { background-color: transparent; scale: 1; }
-  100% { background-color: black; }
+  0% {
+    background-color: transparent;
+    scale: 0.8;
+  }
+  99% {
+    background-color: transparent;
+    scale: 1;
+  }
+  100% {
+    background-color: black;
+  }
 }
 
 @keyframes pip-fadein-player {
-  0% { filter: blur(30px); opacity: 0; }
-  70% { filter: blur(5px); }
-  100% { filter: blur(0); opacity: 1; }
+  0% {
+    filter: blur(30px);
+    opacity: 0;
+  }
+  70% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
 body:has(.player-holder) html,
 body:has(#controls) html {
-  animation: pip-fadein-html 0.5s ease;
+  animation: pip-fadein-html 0.5s ease !important;
   will-change: scale;
 }
 
 body:has(.player-holder) .player-holder,
 body:has(#controls) .player-holder {
-  animation: pip-fadein-player 0.5s ease;
+  animation: pip-fadein-player 0.5s ease !important;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   will-change: filter, opacity;
 }
 
+/* Controls */
 #controls {
-opacity: 1;
+opacity: 1 !important;
 }
 
 #controls > button {
-opacity: 0;
-top: 0;
+opacity: 0 !important;
+top: 0 !important;
 filter: blur(5px);
-border-radius: 6px;
-transition: opacity 0.3s ease, top 0.3s ease, filter 0.3s ease, background-color 0.2s ease;
-backdrop-filter: saturate(1.5) contrast(1.2) blur(var(--blur));
-background-image: none;
-background-color: light-dark(var(--bg-light), var(--bg-dark));
-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-border: 2px solid light-dark(var(--border-light), var(--border-dark));
+border-radius: 6px !important;
+transition: opacity 0.3s ease, top 0.3s ease, filter 0.3s ease, background-color 0.2s ease !important;
+backdrop-filter: saturate(1.5) contrast(1.2) blur(var(--blur)) !important;
+background-image: none !important;
+background-color: var(--bg-light) !important;
+box-shadow: 0 0 6px rgba(0, 0, 0, 0.5) !important;
+border: 2px solid var(--border-light) !important;
 will-change: opacity, top, filter;
+}
+
+@media (prefers-color-scheme: dark) {
+  #controls > button {
+  background-color: var(--bg-dark) !important;
+  border-color: var(--border-dark) !important;
+  }
 }
 
 #controls > button::before {
@@ -781,46 +815,61 @@ top: 50%;
 transform: translate(-50%, -50%);
 align-content: center;
 justify-content: center;
-fill: light-dark(black, white);
+fill: white !important;
+}
+
+@media (prefers-color-scheme: light) {
+  #controls > button::before {
+  fill: black !important;
+  }
 }
 
 #controls > button:hover {
-background-color: black;
+background-color: black !important;
 }
 
 #close::before {
-content: url("chrome://browser/skin/zen-icons/close.svg");
+content: url("chrome://browser/skin/zen-icons/close.svg") !important;
 }
 
 #minimize::before {
-content: url("chrome://browser/skin/zen-icons/unpin.svg");
+content: url("chrome://browser/skin/zen-icons/unpin.svg") !important;
 }
 
 #unpip::before {
-content: url("chrome://browser/skin/zen-icons/screen.svg");
+content: url("chrome://browser/skin/zen-icons/screen.svg") !important;
 }
 
 #controls-bottom-gradient {
-display: none;
+display: none !important;
 }
 
+/* Bottom controls */
 #controls-bottom {
-opacity: 0;
-bottom: -5px;
-background-color: light-dark(var(--bg-light), var(--bg-dark));
-border-radius: 10px;
-padding: 10px 15px;
-margin: 0 5px 5px;
-width: min(calc(100% - 10px), 700px);
-box-sizing: border-box;
-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-backdrop-filter: saturate(3) contrast(2) blur(var(--blur));
+opacity: 0 !important;
+bottom: -5px !important;
+background-color: var(--bg-light) !important;
+border-radius: 10px !important;
+padding: 10px 15px !important;
+margin: 0 5px !important;
+margin-bottom: 5px !important;
+width: min(calc(100% - 10px), 700px) !important;
+box-sizing: border-box !important;
+box-shadow: 0 0 6px rgba(0, 0, 0, 0.5) !important;
+backdrop-filter: saturate(3) contrast(2) blur(var(--blur)) !important;
 filter: blur(10px);
-transition: opacity 0.3s ease, bottom 0.3s ease, filter 0.3s ease;
-border: 2px solid light-dark(var(--border-light), var(--border-dark));
-left: calc(50% - 5px);
-transform: translateX(-50%);
+transition: opacity 0.3s ease, bottom 0.3s ease, filter 0.3s ease !important;
+border: 2px solid var(--border-light) !important;
+left: calc(50% - 5px) !important;
+transform: translateX(-50%) !important;
 will-change: opacity, bottom, filter;
+}
+
+@media (prefers-color-scheme: dark) {
+  #controls-bottom {
+  background-color: var(--bg-dark) !important;
+  border-color: var(--border-dark) !important;
+  }
 }
 
 #controls-bottom .start-controls {
@@ -829,105 +878,129 @@ display: none;
 
 @media (width > 300px) {
   #controls-bottom .start-controls {
-  display: flex;
+  display: flex !important;
   }
 }
 
 #controls-bottom .start-controls #timestamp {
-font-size: 12px;
-color: light-dark(black, white);
+font-size: 12px !important;
+color: black !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #controls-bottom .start-controls #timestamp {
+  color: white !important;
+  }
 }
 
 #controls-bottom .end-controls {
-display: flex;
+display: flex !important;
 }
 
+/* Scrubbers */
 #controls-bottom #scrubber,
 #controls-bottom #audio-scrubber {
-margin: 0;
+margin: 0 !important;
 }
 
 #controls-bottom #scrubber::-moz-range-progress {
-background: white;
+background: white !important;
 }
 
 #controls-bottom #scrubber::-moz-range-track,
 #controls-bottom #audio-scrubber::-moz-range-track {
-background-color: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #controls-bottom #scrubber::-moz-range-track,
+  #controls-bottom #audio-scrubber::-moz-range-track {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }
 
 #controls-bottom #scrubber::-moz-range-thumb,
 #controls-bottom #audio-scrubber::-moz-range-thumb {
-background: white;
-width: 12px;
-height: 12px;
-border: none;
+background: white !important;
+width: 12px !important;
+height: 12px !important;
+border: none !important;
 }
 
 #controls-bottom #audio-scrubber::-moz-range-thumb {
-width: 8px;
-height: 8px;
-opacity: 1;
+width: 8px !important;
+height: 8px !important;
+opacity: 1 !important;
 }
 
-#controls-bottom button,
-#settings button {
-opacity: 1;
+/* Buttons */
+#controls-bottom button {
+opacity: 1 !important;
 position: relative;
-padding: 6px;
-background-size: 16px;
-width: 28px;
-height: 28px;
-border-radius: 6px;
-transition: background-color 0.2s ease;
+padding: 6px !important;
+background-size: 16px !important;
+width: 28px !important;
+height: 28px !important;
+border-radius: 6px !important;
+transition: background-color 0.2s ease !important;
 -moz-context-properties: fill;
-fill: light-dark(black, white);
+fill: black !important;
 }
 
-#controls-bottom button[disabled],
-#settings button[disabled] {
-cursor: default;
-fill-opacity: 0.4;
+@media (prefers-color-scheme: dark) {
+  #controls-bottom button {
+  fill: white !important;
+  }
 }
 
-#controls-bottom button[disabled]::after,
-#settings button[disabled]::after {
-display: none;
+#controls-bottom button[disabled] {
+cursor: default !important;
+fill-opacity: 0.4 !important;
 }
 
-#controls-bottom button:not([disabled]):hover,
-#settings button:not([disabled]):hover {
-background-color: light-dark(var(--hover-light), var(--hover-dark));
+#controls-bottom button[disabled]::after {
+display: none !important;
 }
 
-#controls-bottom button:not([disabled]):active,
-#settings button:not([disabled]):active {
-background-color: light-dark(var(--active-light), var(--active-dark));
+#controls-bottom button:not([disabled]):hover {
+background-color: var(--hover-light) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #controls-bottom button:not([disabled]):hover {
+  background-color: var(--hover-dark) !important;
+  }
+}
+
+#controls-bottom button:not([disabled]):active {
+background-color: var(--active-light) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #controls-bottom button:not([disabled]):active {
+  background-color: var(--active-dark) !important;
+  }
 }
 
 #controls-bottom button#playpause {
-background-image: url("chrome://browser/skin/zen-icons/media-play.svg");
+background-image: url("chrome://browser/skin/zen-icons/media-play.svg") !important;
 }
 
 #controls-bottom button#audio {
-background-image: url("chrome://browser/skin/zen-icons/media-unmute.svg");
+background-image: url("chrome://browser/skin/zen-icons/media-unmute.svg") !important;
 }
 
 #controls-bottom button#seekBackward {
-background-image: url("chrome://browser/skin/zen-icons/reload.svg");
+background-image: url("chrome://browser/skin/zen-icons/reload.svg") !important;
 scale: -1 1;
 }
 
-#controls-bottom button#seekBackward::before,
-#controls-bottom button#seekForward::before {
+#controls-bottom button#seekBackward::before {
 content: "5";
 font-size: 8px;
 position: absolute;
 top: 50%;
 left: 50%;
-}
-
-#controls-bottom button#seekBackward::before {
 transform: translate(50%, -50%);
 scale: -1 1;
 }
@@ -937,146 +1010,236 @@ scale: -1 1;
 }
 
 #controls-bottom button#seekForward {
-background-image: url("chrome://browser/skin/zen-icons/reload.svg");
+background-image: url("chrome://browser/skin/zen-icons/reload.svg") !important;
 }
 
 #controls-bottom button#seekForward::before {
+content: "5";
+font-size: 8px;
+position: absolute;
+top: 50%;
+left: 50%;
 transform: translate(-50%, -50%);
 }
 
 #controls-bottom button#fullscreen {
-background-image: url("chrome://browser/skin/zen-icons/fullscreen.svg");
+background-image: url("chrome://browser/skin/zen-icons/fullscreen.svg") !important;
 }
 
+/* Control layouts */
 #controls-bottom .controls-bottom-upper {
-margin: 0 0 5px;
-width: 100%;
-height: fit-content;
+margin: 0 !important;
+margin-bottom: 5px !important;
+width: 100% !important;
+height: fit-content !important;
 }
 
 #controls-bottom .controls-bottom-upper .scrubber-no-drag {
-margin: 0;
+margin: 0 !important;
 }
 
 #controls-bottom .controls-bottom-upper:has(#scrubber[hidden]) {
-display: none;
-margin: 0;
+display: none !important;
+margin: 0 !important;
 }
 
 #controls-bottom .controls-bottom-lower {
-margin: 0;
+margin: 0 !important;
 }
 
+/* Settings panel */
 #settings {
-bottom: 80px;
-right: 0;
-display: block;
-transition: opacity 0.3s ease, bottom 0.3s ease;
+bottom: 80px !important;
+right: 0 !important;
+display: block !important;
+transition: opacity 0.3s ease, bottom 0.3s ease !important;
 }
 
 #settings .arrow {
-display: none;
+display: none !important;
 }
 
 #settings label,
 #settings legend {
-font-family: system-ui;
-color: light-dark(black, white);
+font-family: system-ui !important;
+color: black !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings label,
+  #settings legend {
+  color: white !important;
+  }
 }
 
 #settings .slider {
-background-color: rgba(0, 0, 0, 0.07);
-outline: 1px solid light-dark(#8f8f9d, #bfbfc9);
+background-color: rgba(0, 0, 0, 0.07) !important;
+outline: 1px solid #8f8f9d !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings .slider {
+  outline-color: #bfbfc9 !important;
+  }
 }
 
 #settings .slider::before {
-background-color: light-dark(#8f8f9d, #bfbfc9);
+background-color: #8f8f9d !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings .slider::before {
+  background-color: #bfbfc9 !important;
+  }
 }
 
 #settings input:checked {
-border-color: light-dark(var(--primary-mixed), var(--primary));
+border-color: var(--primary-mixed) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings input:checked {
+  border-color: var(--primary) !important;
+  }
 }
 
 #settings input:checked + .slider {
-background-color: light-dark(var(--primary-mixed), var(--primary));
-outline-color: light-dark(var(--primary-mixed), var(--primary));
+background-color: var(--primary-mixed) !important;
+outline-color: var(--primary-mixed) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings input:checked + .slider {
+  background-color: var(--primary) !important;
+  outline-color: var(--primary) !important;
+  }
 }
 
 #settings input:checked + .slider::before {
-background-color: white;
+background-color: white !important;
 }
 
 #settings > .panel-fieldset {
-background-color: var(--glass-bg);
+background-color: var(--glass-bg-light) !important;
 backdrop-filter: blur(15px);
 filter: blur(0);
 transition: backdrop-filter 0.3s ease, filter 0.3s ease;
-border: 1px solid light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3));
-box-shadow: 0 0 10px light-dark(var(--glass-shadow-light), var(--glass-shadow-dark));
-padding: 0;
+border: 1px solid rgba(20, 20, 20, 0.2) !important;
+box-shadow: 0 0 10px var(--glass-shadow-light) !important;
+padding: 0 !important;
 will-change: filter;
 }
 
+@media (prefers-color-scheme: dark) {
+  #settings > .panel-fieldset {
+  background-color: var(--glass-bg-dark) !important;
+  border-color: rgba(235, 235, 235, 0.3) !important;
+  box-shadow: 0 0 10px var(--glass-shadow-dark) !important;
+  }
+}
+
 #settings .grey-line {
-width: calc(100% - 10px);
-margin: 0 auto;
-background-color: light-dark(rgba(20, 20, 20, 0.2), rgba(235, 235, 235, 0.3));
+width: calc(100% - 10px) !important;
+margin: 0 auto !important;
+background-color: rgba(20, 20, 20, 0.2) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings .grey-line {
+  background-color: rgba(235, 235, 235, 0.3) !important;
+  }
 }
 
 #settings.hide {
-bottom: 70px;
-opacity: 0;
-pointer-events: none;
+bottom: 70px !important;
+opacity: 0 !important;
+pointer-events: none !important;
 }
 
 #settings.hide > .panel-fieldset {
-backdrop-filter: none;
+backdrop-filter: none !important;
 filter: blur(5px);
 }
 
+#settings button {
+opacity: 1 !important;
+position: relative;
+padding: 6px !important;
+background-size: 16px !important;
+width: 28px !important;
+height: 28px !important;
+border-radius: 6px !important;
+transition: background-color 0.2s ease !important;
+-moz-context-properties: fill;
+fill: black !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings button {
+  fill: white !important;
+  }
+}
+
+#settings button[disabled] {
+cursor: default !important;
+fill-opacity: 0.4 !important;
+}
+
+#settings button[disabled]::after {
+display: none !important;
+}
+
+#settings button:not([disabled]):hover {
+background-color: var(--hover-light) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings button:not([disabled]):hover {
+  background-color: var(--hover-dark) !important;
+  }
+}
+
+#settings button:not([disabled]):active {
+background-color: var(--active-light) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #settings button:not([disabled]):active {
+  background-color: var(--active-dark) !important;
+  }
+}
+
+/* State classes - Applied to #controls element */
 #controls.muted #controls-bottom #audio {
-background-image: url("chrome://browser/skin/zen-icons/media-mute.svg");
+background-image: url("chrome://browser/skin/zen-icons/media-mute.svg") !important;
 }
 
 #controls.playing #controls-bottom #playpause {
-background-image: url("chrome://browser/skin/zen-icons/media-pause.svg");
+background-image: url("chrome://browser/skin/zen-icons/media-pause.svg") !important;
 }
 
+/* Hover states */
 body:fullscreen #controls[showing]:hover > button,
 body:not(:fullscreen) #controls:hover > button {
-  opacity: 1;
-  top: 10px;
-  filter: blur(0);
+  opacity: 1 !important;
+  top: 10px !important;
+  filter: blur(0) !important;
 }
 
 body:fullscreen #controls[showing]:hover #controls-bottom,
 body:not(:fullscreen) #controls:hover #controls-bottom {
-  opacity: 1;
-  bottom: 5px;
+  opacity: 1 !important;
+  bottom: 5px !important;
   filter: blur(0);
 }
 
+/* Fullscreen */
 body:fullscreen:has(#controls:not([showing])) {
-  cursor: none;
+  cursor: none !important;
 }
 
 body:fullscreen #controls #controls-bottom #fullscreen {
-  background-image: url("chrome://browser/skin/zen-icons/fullscreen-exit.svg");
-}
-
-/* ============== Smaller Compact Mode Sidebar ==================== */
-/* Reduce width when sidebar is expanded */
-@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
-  #navigator-toolbox {
-  --zen-navigation-toolbar-min-width: 100px !important;
-  }
-}
-
-@media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
-  :root[zen-compact-mode="true"] #navigator-toolbox {
-    margin-block: 12.5vh !important;
-    height: 75vh !important;
-  }
+  background-image: url("chrome://browser/skin/zen-icons/fullscreen-exit.svg") !important;
 }
 
 /*=============== Opposite Side Glace Buttons =================== */
@@ -1201,3 +1364,17 @@ inset-inline-start: 100% !important;
 :root[zen-compact-mode="true"] .urlbar-background {
   transition: inherit !important;
 }
+
+@media (-moz-bool-pref: "zen.view.sidebar-expanded") {
+  #navigator-toolbox {
+  --zen-navigation-toolbar-min-width: 100px !important;
+  }
+}
+
+@media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
+  :root[zen-compact-mode="true"] #navigator-toolbox {
+    margin-block: 12.5vh !important;
+    height: 75vh !important;
+  }
+}
+
