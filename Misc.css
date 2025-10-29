@@ -20,3 +20,17 @@ display: none !important;
     font-variant-ligatures: contextual common-ligatures discretionary-ligatures historical-ligatures;
     text-rendering: optimizeLegibility;
 }
+
+/*======= Context-Menu Gradient===========*/
+#contentAreaContextMenu,
+#placesContext,
+#tabContextMenu,
+#toolbar-context-menu {
+--panel-background: linear-gradient(
+    135deg,
+    rgba(20, 20, 25, 1) 0%,
+                                    rgba(35, 40, 50, 1) 50%,
+                                    rgba(60, 70, 90, 1) 100%
+) !important;
+border-radius: 8px !important;
+}
