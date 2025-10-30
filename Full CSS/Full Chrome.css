@@ -898,7 +898,7 @@ inset-inline-start: 100% !important;
   outline: none !important;
   transform: translateX(5px) !important;
 }
-/* ============= COMPACT MODE UI ================ */
+
 :root[customizing] {
   /* Revert all compact mode styles when customizing */
   --disable-compact-mode: true !important;
@@ -925,13 +925,11 @@ inset-inline-start: 100% !important;
   0 0 72px rgba(80,160,255,0.60),
   0 0 0 1px rgba(150,190,255,0.35) !important;
 }
-/* ============= COMPACT MODE UI ================ */
 :root[customizing] {
   --disable-compact-mode: true !important;
 }
 
-/* Compact Mode Active */
-:root[zen-compact-mode="true"]:not([customizing]) {
+:root[zen-compact-mode="true"]:not([customizing]) .browserContainer {
   --margin-top-fix: 0 !important;
 }
 
@@ -1013,17 +1011,20 @@ inset-inline-start: 100% !important;
 :root[zen-compact-mode="true"]:not([customizing]) .urlbar-background {
   transition: inherit !important;
 }
+
 @media (-moz-bool-pref: "zen.view.sidebar-expanded") {
   #navigator-toolbox {
   --zen-navigation-toolbar-min-width: 100px !important;
   }
 }
+
 @media (-moz-bool-pref: "zen.view.compact.hide-tabbar") {
   :root[zen-compact-mode="true"]:not([customizing]) #navigator-toolbox {
     margin-block: 12.5vh !important;
     height: 75vh !important;
   }
 }
+
 
 
 /*======= Context-Menu Gradient===========*/
