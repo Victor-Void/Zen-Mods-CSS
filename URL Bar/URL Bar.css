@@ -16,8 +16,9 @@ border-radius: 14px !important;
 box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
-html:has(#urlbar[open]) .browserContainer { filter: blur(10px); }
-
 /* URL bar icon order */
 #zen-copy-url-button { order: 999 !important; }
 #identity-box { order: -999 !important; }
+
+/* html:has(#urlbar[open]) .browserContainer { filter: blur(10px); } */
+/* Uncomment if you want background blur when URL Bar is focused */
