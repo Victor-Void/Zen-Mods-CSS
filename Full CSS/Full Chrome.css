@@ -46,13 +46,13 @@ border-radius: 14px !important;
 box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* URL bar icon order */
-#zen-copy-url-button { order: 999 !important; }
-#identity-box { order: -999 !important; }
-
 
 /* html:has(#urlbar[open]) .browserContainer { filter: blur(10px); } */
 /* Uncomment if you want background blur when URL Bar is focused */
+
+/* URL bar icon order */
+#zen-copy-url-button { order: 999 !important; }
+#identity-box { order: -999 !important; }
 
 /* ==================== SIDEBAR ==================== */
 /* Floating bookmark/history sidebar */
@@ -898,6 +898,22 @@ inset-inline-start: 100% !important;
   outline: none !important;
   transform: translateX(5px) !important;
 }
+/* ============= COMPACT MODE UI ================ */
+:root[customizing] {
+  /* Revert all compact mode styles when customizing */
+  --disable-compact-mode: true !important;
+}
+
+:root[zen-compact-mode="true"]:not([customizing]) #titlebar {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  transform: translateX(10px) !important;
+}
 :root[zen-compact-mode="true"]:not([customizing]) #titlebar{
   background: rgba(0, 0, 0, 0.97) !important;
   backdrop-filter: blur(6px) saturate(100%) !important;
@@ -909,9 +925,16 @@ inset-inline-start: 100% !important;
   0 0 72px rgba(80,160,255,0.60),
   0 0 0 1px rgba(150,190,255,0.35) !important;
 }
-:root[zen-compact-mode="true"]:not([customizing]) .browserContainer {
+/* ============= COMPACT MODE UI ================ */
+:root[customizing] {
+  --disable-compact-mode: true !important;
+}
+
+/* Compact Mode Active */
+:root[zen-compact-mode="true"]:not([customizing]) {
   --margin-top-fix: 0 !important;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper {
   position: absolute !important;
   top: 0 !important;
@@ -927,13 +950,13 @@ inset-inline-start: 100% !important;
   overflow: visible !important;
   display: block !important;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-container {
   position: fixed !important;
   top: 20px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: auto !important;
-  max-width: fit-content !important;
+  width: fit-content !important;
   background: transparent !important;
   z-index: 1000 !important;
   display: flex !important;
@@ -942,12 +965,12 @@ inset-inline-start: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   height: auto !important;
-  min-height: 0 !important;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) #nav-bar {
   display: flex !important;
   align-items: center !important;
-  gap: 0px !important;
+  gap: 0 !important;
   background: rgba(0, 0, 0, 0.97) !important;
   backdrop-filter: blur(6px) saturate(100%) !important;
   -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
@@ -960,12 +983,12 @@ inset-inline-start: 100% !important;
   border-radius: 12px !important;
   padding: 1px 3px !important;
   margin: 0 !important;
-  height: 500px !important;
-  max-height: 50px !important;
+  height: 50px !important;
   overflow: visible !important;
   transition: box-shadow 0.35s ease, background 0.35s ease !important;
   will-change: box-shadow, background;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) .urlbar-input-container {
   flex: 1 1 auto !important;
   display: flex !important;
@@ -973,10 +996,12 @@ inset-inline-start: 100% !important;
   margin: 0 !important;
   transition: inherit !important;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) .urlbar-input-container .urlbar-input {
   width: 100% !important;
   text-align: center !important;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) .urlbar-input-container .urlbar-icons {
   position: absolute !important;
   right: 8px !important;
@@ -984,6 +1009,7 @@ inset-inline-start: 100% !important;
   align-items: center !important;
   gap: 4px !important;
 }
+
 :root[zen-compact-mode="true"]:not([customizing]) .urlbar-background {
   transition: inherit !important;
 }
@@ -998,6 +1024,7 @@ inset-inline-start: 100% !important;
     height: 75vh !important;
   }
 }
+
 
 /*======= Context-Menu Gradient===========*/
 #contentAreaContextMenu,
