@@ -16,6 +16,3 @@ box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
 #sidebar-splitter { display: none !important; }
 #appcontent { margin-left: 0 !important; }
 
-.sidebar-panel #placesContext > :is(menuitem, menu) {
-    padding-inline-start: 30px !important;
-}
