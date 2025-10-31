@@ -30,7 +30,8 @@
     outline: none !important;
     transform: translateX(10px) !important;
 }
-:root[zen-compact-mode="true"]:not([customizing]) #titlebar{
+
+:root[zen-compact-mode="true"]:not([customizing]) #titlebar {
     background: rgba(0, 0, 0, 0.97) !important;
     backdrop-filter: blur(6px) saturate(100%) !important;
     -webkit-backdrop-filter: blur(6px) saturate(100%) !important;
@@ -41,12 +42,25 @@
     0 0 72px rgba(80,160,255,0.60),
     0 0 0 1px rgba(150,190,255,0.35) !important;
 }
+
 :root[customizing] {
     --disable-compact-mode: true !important;
 }
 
 :root[zen-compact-mode="true"]:not([customizing]) .browserContainer {
     --margin-top-fix: 0 !important;
+}
+
+/* Create a hover detection zone at the top */
+:root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper::before {
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 12px !important; /* Change trigger area hitbox */
+    z-index: 9999 !important;
+    pointer-events: auto !important;
 }
 
 :root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper {
@@ -65,9 +79,13 @@
     display: block !important;
 }
 
+:root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper:hover {
+    pointer-events: auto !important;
+}
+
 :root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-container {
     position: fixed !important;
-    top: 20px !important;
+    top: -70px !important; /* Hidden above viewport */
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: fit-content !important;
@@ -79,6 +97,14 @@
     margin: 0 !important;
     padding: 0 !important;
     height: auto !important;
+    opacity: 0 !important;
+    transition: top 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* Show navbar when hovering near top */
+:root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper:hover #zen-appcontent-navbar-container {
+    top: 15px !important;
+    opacity: 1 !important;
 }
 
 :root[zen-compact-mode="true"]:not([customizing]) #nav-bar {
@@ -97,6 +123,7 @@
     border-radius: 12px !important;
     padding: 1px 3px !important;
     margin: 0 !important;
+    width: 35vw !important; /* Change width of floating toolbar */
     height: 50px !important;
     overflow: visible !important;
     transition: box-shadow 0.35s ease, background 0.35s ease !important;
