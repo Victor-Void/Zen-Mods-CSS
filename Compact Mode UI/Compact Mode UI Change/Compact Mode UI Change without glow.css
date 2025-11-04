@@ -52,7 +52,7 @@
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    height: 12px !important; /* Change trigger area hitbox */
+    height: 20px !important; /* Change trigger area hitbox */
     z-index: 9999 !important;
     pointer-events: auto !important;
 }

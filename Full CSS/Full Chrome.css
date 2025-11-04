@@ -75,19 +75,19 @@ box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
 
 
 /* ==================== BOOKMARK FOLDER COLORS ==================== */
-[id="1760635303357-66"] image, /* Pirated Media */
-[id="1760635001487-86"] image, /* AI's */
-[id="1760635303279-47"] image, /* Arch Linux */
-[id="1760635303381-55"] image, /* Project & Learning */
-[id="1760635001460-28"] image  /* Personal Fun Projects */ {
+[id="1762259533276-88"] image, /* Pirated Media */
+[id="1762186525542-89"] image, /* AI's */
+[id="1762259671156-13"] image, /* Arch Linux */
+[id="1762260057893-67"] image, /* Project & Learning */
+[id="1762186525597-49"] image  /* Personal Fun Projects */ {
   -moz-context-properties: fill, stroke !important;
 }
 
-[id="1760635303357-66"] image { fill: rgb(255, 16, 83) !important; }
-[id="1760635001487-86"] image { fill: rgb(0, 127, 255) !important; }
-[id="1760635303279-47"] image { fill: rgb(127, 127, 255) !important; }
-[id="1760635303381-55"] image { fill: rgb(0, 255, 127) !important; }
-[id="1760635001460-28"] image { fill: rgb(255, 223, 0) !important; }
+[id="1762259533276-88"] image { fill: rgb(255, 16, 83) !important; }
+[id="1762186525542-89"] image { fill: rgb(0, 127, 255) !important; }
+[id="1762259671156-13"] image { fill: rgb(127, 127, 255) !important; }
+[id="1762260057893-67"] image { fill: rgb(0, 255, 127) !important; }
+[id="1762186525597-49"] image { fill: rgb(255, 223, 0) !important; }
 
 /* ==================== VIEW SPLITTER ==================== */
 .zen-view-splitter-header {
@@ -442,8 +442,7 @@ box-shadow: 0 0 3px rgba(0,0,0,0.95) !important;
   --toolbarbutton-hover-background: transparent !important;
 }
 
-#TabsToolbar-customization-target .toolbarbutton-badge,
-#TabsToolbar-customization-target .toolbarbutton-text {
+#TabsToolbar-customization-target .toolbarbutton-badge{
 display: none !important;
 }
 
@@ -981,7 +980,7 @@ inset-inline-start: 100% !important;
 
 /* Show navbar when hovering near top */
 :root[zen-compact-mode="true"]:not([customizing]) #zen-appcontent-navbar-wrapper:hover #zen-appcontent-navbar-container {
-  top: 20px !important;
+  top: 15px !important;
   opacity: 1 !important;
 }
 
@@ -1020,7 +1019,7 @@ inset-inline-start: 100% !important;
   right: 8px !important;
   display: flex !important;
   align-items: center !important;
-  gap: 4px !important;
+  gap: 3px !important;
 }
 
 :root[zen-compact-mode="true"]:not([customizing]) .urlbar-background {
