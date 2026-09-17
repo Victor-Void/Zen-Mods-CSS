@@ -1,4 +1,4 @@
-/*=============== Opposite Side Glace Buttons =================== */
+/* Opposite Side Glance Buttons */
 .zen-glance-sidebar-container {
     left: auto !important;
     right: 100% !important;
@@ -6,7 +6,7 @@
 }
 
 #main-window[zen-right-side="true"] .zen-glance-sidebar-container {
-right: auto !important;
-left: 100% !important;
-inset-inline-start: 100% !important;
+    right: auto !important;
+    left: 100% !important;
+    inset-inline-start: 100% !important;
 }

@@ -1,0 +1,9 @@
+/* VIEW SPLITTER */
+.zen-view-splitter-header {
+    opacity: 0 !important;
+    transition: opacity 0.1s ease !important;
+}
+
+.zen-view-splitter-header:hover {
+    opacity: 1 !important;
+}
