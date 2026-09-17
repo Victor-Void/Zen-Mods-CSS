@@ -1,0 +1,30 @@
+/* Essentials spacing */
+.zen-essentials-container.zen-workspace-tabs-section {
+    margin-top: 3px !important;
+}
+#zen-essentials-container,
+.zen-essentials-container {
+    gap: 0 !important;
+}
+
+/* Miniplayer button order */
+.zen-media-pip-button {
+    order: 2 !important;
+}
+.zen-media-close-button {
+    order: 1 !important;
+}
+
+/* Main menu button icon */
+toolbarbutton#PanelUI-menu-button {
+    list-style-image: url("chrome://branding/content/about-logo.svg") !important;
+    filter: grayscale(1) brightness(1.5) !important;
+
+    image {
+        scale: 1.7;
+    }
+
+    @media (prefers-color-scheme: light) {
+        filter: grayscale(1) brightness(0.35) !important;
+    }
+}

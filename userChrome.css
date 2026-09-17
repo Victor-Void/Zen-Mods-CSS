@@ -1,0 +1,16 @@
+/*
+ * Zen Browser Custom UI
+ * Entry point. Every tweak lives in its own module under modules/ so it can be
+ * enabled, disabled, or fixed in isolation.
+ */
+
+@import url("modules/toolbar.css");
+@import url("modules/urlbar.css");
+@import url("modules/sidebar.css");
+@import url("modules/compact-mode.css");
+@import url("modules/split-view.css");
+@import url("modules/findbar.css");
+@import url("modules/menus.css");
+@import url("modules/minplayer.css");
+@import url("modules/picture-in-picture.css");
+@import url("modules/glance.css");

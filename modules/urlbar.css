@@ -1,0 +1,28 @@
+/* URL bar icon order */
+#zen-copy-url-button {
+    order: 999 !important;
+}
+#identity-box {
+    order: -999 !important;
+}
+
+/* Center text */
+#urlbar .urlbar-input,
+#urlbar .urlbar-input-container {
+    text-align: center !important;
+    position: relative;
+}
+
+/* HIDE EXTENSION IN URL BAR */
+#urlbar #identity-box.extensionPage #identity-icon-label {
+    display: none !important;
+}
+
+/* Show native bookmark icon in urlbar */
+#star-button-box {
+    display: flex !important;
+}
+
+#zen-site-data-header-bookmark {
+    display: none !important;
+}

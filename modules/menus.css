@@ -1,0 +1,12 @@
+/* UNIFIED MENU */
+#zen-site-data-header toolbarbutton::before {
+    background: color-mix(in srgb, currentcolor 6%, transparent) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#zen-site-data-header toolbarbutton:hover {
+    background-color: color-mix(in srgb, currentcolor 10%, transparent) !important;
+    transition: background-color 0.1s linear !important;
+    border-radius: 6px !important;
+}
